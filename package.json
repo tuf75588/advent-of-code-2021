@@ -1,0 +1,19 @@
+{
+  "name": "advent-of-code-2021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node solutions/01/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuf75588/advent-of-code-2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuf75588/advent-of-code-2021/issues"
+  },
+  "homepage": "https://github.com/tuf75588/advent-of-code-2021#readme"
+}
