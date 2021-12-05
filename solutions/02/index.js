@@ -8,7 +8,8 @@ console.log(input);
 function getSeaLevel(inputArray) {
   let y = 0; //depth
   let x = 0; // horizontal position
-  return inputArray;
+  const entry = Object.entries(inputArray);
+  return entry;
 }
 
 console.log(getSeaLevel(input));
