@@ -21,4 +21,25 @@ for (const [direction, value] of directions) {
   if (direction === 'down') y += value;
   if (direction === 'up') y -= value;
 }
-console.log(x * y);
+
+function calculateComplexWaypoint(values) {
+  let aim = 0;
+  let y = 0; //depth
+  let x = 0;
+  for (const [direction, value] of values) {
+    if (direction === 'forward') {
+      x += value;
+      y += aim * value;
+    }
+    if (direction === 'up') {
+      aim -= value;
+    }
+    if (direction === 'down') {
+      aim += value;
+    }
+  }
+  return { x, y, aim, y2: x * y };
+}
+
+const x2 = calculateComplexWaypoint(directions);
+console.log(x2);
