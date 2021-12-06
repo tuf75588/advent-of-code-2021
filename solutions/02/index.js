@@ -1,15 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 
-const file = path.join(__dirname, 'input.txt');
-const input = fs.readFileSync(file, { encoding: 'utf-8' }).split('\n');
-console.log(input);
+const data = fs.readFileSync(path.resolve(__dirname, './input.txt'), {
+  encoding: 'utf-8',
+});
 
-function getSeaLevel(inputArray) {
-  let y = 0; //depth
-  let x = 0; // horizontal position
-  const entry = Object.entries(inputArray);
-  return entry;
+const directions = data
+  .trim()
+  .split('\n')
+  .map((direction) => {
+    const split = direction.split(' ');
+    const [dir, value] = split;
+    return [dir, Number(value)];
+  });
+
+let x = 0;
+let y = 0;
+for (const [direction, value] of directions) {
+  if (direction === 'forward') x += value;
+  if (direction === 'down') y += value;
+  if (direction === 'up') y -= value;
 }
-
-console.log(getSeaLevel(input));
+console.log(x * y);
