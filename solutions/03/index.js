@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 
-
 const data = fs.readFileSync(path.resolve(__dirname, './input.txt'), {
   encoding: 'utf-8',
 });
@@ -96,5 +95,5 @@ const co2BitStr = getRating(binList, getCO2CountIndex).join('');
 const oxygen = parseInt(oxygenBitStr, 2);
 const co2 = parseInt(co2BitStr, 2);
 
-const combined = oxygen * co2;
+const combined = oxygen * co2; //second answer
 console.log(combined);
