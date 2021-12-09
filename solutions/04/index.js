@@ -26,4 +26,10 @@ function parseBoard(board) {
   return { board: parsedBoard, index };
 }
 
-parseBoard(numbers);
+// parseBoard(numbers);
+
+function updateBoard(board, number) {
+  if (board.index[number]) {
+    board.index[number].isMarked = true;
+  }
+}
