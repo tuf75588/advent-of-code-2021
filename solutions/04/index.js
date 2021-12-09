@@ -33,3 +33,18 @@ function updateBoard(board, number) {
     board.index[number].isMarked = true;
   }
 }
+
+function checkForWin(board) {
+  const cols = board[0].length;
+  for (const row of board) {
+    // every item is marked
+    if (row.every((number) => number.isMarked)) return true;
+  }
+  for (let colIdx = 0; colIdx < cols; colIdx++) {
+    const items = board.map((row) => row[colIdx]);
+    if (items.every((item) => item.isMarked)) return true;
+  }
+  return false;
+}
+
+
