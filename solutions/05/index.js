@@ -79,4 +79,21 @@ const nonDiagonalLines = [...horizontalLines, ...verticalLines];
 const linedGrid = applyLinesToGrid(nonDiagonalLines);
 const intersections = getLineIntersections(linedGrid);
 const firstAnswer = intersections.length;
-console.log(firstAnswer);
+
+const diagonalLines = lines.filter(({ x1, y1, x2, y2 }) => {
+  if (x1 === x2 || y1 === y2) return false;
+
+  const xDiff = x1 - x2;
+  const yDiff = y1 - y2;
+  return Math.abs(xDiff) === Math.abs(yDiff);
+});
+
+const secondLinedGrid = applyLinesToGrid([
+  ...nonDiagonalLines,
+  ...diagonalLines,
+]);
+
+const secondIntersections = getLineIntersections(secondLinedGrid);
+const secondAnswer = secondIntersections.length;
+
+secondAnswer;
