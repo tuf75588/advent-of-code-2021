@@ -95,5 +95,3 @@ const secondLinedGrid = applyLinesToGrid([
 
 const secondIntersections = getLineIntersections(secondLinedGrid);
 const secondAnswer = secondIntersections.length;
-
-secondAnswer;
