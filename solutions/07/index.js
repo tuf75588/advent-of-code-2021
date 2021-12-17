@@ -1,7 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 
-const data = fs.readFileSync(path.resolve(__dirname, './input.txt'), { encoding: 'utf-8' });
+const data = fs.readFileSync(path.resolve(__dirname, './input.txt'), {
+  encoding: 'utf-8',
+});
 
-const positions = data.trim().split('')
-console.log(positions)
+// const positions = data.trim().split('')
+// console.log(positions)
+
+let n = 0;
+
+while (n < 3) {
+  n++;
+}
+
+console.log(n);
