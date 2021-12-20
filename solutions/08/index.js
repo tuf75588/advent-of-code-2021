@@ -52,6 +52,90 @@ function partTwo(signals) {
     return [sortedPatterns, sortedOutputs];
   });
   const decodedOutputValues = sortedSignals.map((signal) => {
-    return 'something for later';
+    return decipherOutput(signal);
   });
+
+  const result = decodedOutputValues.reduce((acc, curr) => acc + curr, 0);
+  return result;
 }
+
+function union(setA, setB) {
+  const result = new Set(setA);
+
+  for (let element of setB) {
+    result.add(element);
+  }
+  return result;
+}
+
+function difference(setA, setB) {
+  const result = new Set();
+  for (let element of setA) {
+    if (!setB.has(element)) result.add(element);
+  }
+  return result;
+}
+
+function decipherOutput(signal) {
+  const [patterns, output] = signal;
+  const one = getOne(patterns);
+  const four = getFour(patterns);
+  const seven = getSeven(patterns);
+  const eight = getEight(patterns);
+
+  const segmentsKnown = {
+    top: null,
+    upperRight: null,
+    lowerRight: null,
+  };
+  segmentsKnown.top = [...difference(new Set(seven), new Set(one))][0];
+
+  // six - 6 segments
+
+  const [six] = patterns.filter(
+    (pattern) =>
+      pattern.length === 6 &&
+      [...one].filter((l) => pattern.includes(l)).length === 1
+  );
+
+  segmentsKnown.upperRight = [...difference(new Set(one), new Set(six))][0];
+  segmentsKnown.lowerRight = [
+    ...difference(new Set(one), new Set(segmentsKnown.upperRight)),
+  ][0];
+
+  const [three] = patterns.filter(
+    (pattern) =>
+      pattern.length === 5 &&
+      pattern.includes(segmentsKnown.upperRight) &&
+      pattern.includes(segmentsKnown.lowerRight)
+  );
+
+  const nine = [...union(new Set(three), new Set(four))].sort().join('');
+
+  const [two] = patterns.filter(
+    (pattern) =>
+      pattern.length === 5 &&
+      pattern !== three &&
+      pattern.includes(segmentsKnown.upperRight)
+  );
+
+  const [five] = patterns.filter((pattern) => {
+    return pattern.length === 5 && pattern !== two && pattern !== three;
+  });
+  const decipheredOutputs = output.map((val) => {
+    if (val === one) return 1;
+    if (val === two) return 2;
+    if (val === three) return 3;
+    if (val === four) return 4;
+    if (val === five) return 5;
+    if (val === six) return 6;
+    if (val === seven) return 7;
+    if (val === eight) return 8;
+    if (val === nine) return 9;
+
+    return 0;
+  });
+  return Number(decipheredOutputs.join(''));
+}
+
+const secondAnswer = partTwo(segments); // 936117
