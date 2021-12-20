@@ -34,3 +34,24 @@ function simpleNumberCount(patterns) {
 }
 
 const firstAnswer = partOne(segments); // 352
+
+/* part two */
+
+const getNumber = (length) => (patterns) =>
+  patterns.find((p) => p.length === length);
+
+const getOne = getNumber(2);
+const getSeven = getNumber(3);
+const getFour = getNumber(4);
+const getEight = getNumber(7);
+
+function partTwo(signals) {
+  const sortedSignals = signals.map(([patterns, outputs]) => {
+    const sortedPatterns = patterns.map((p) => [...p].sort().join(''));
+    const sortedOutputs = outputs.map((o) => [...o].sort().join(''));
+    return [sortedPatterns, sortedOutputs];
+  });
+  const decodedOutputValues = sortedSignals.map((signal) => {
+    return 'something for later';
+  });
+}
