@@ -10,20 +10,27 @@ const positions = data.split(',').map((a) => parseInt(a.trim()));
 /* find the most re-occuring integer in this array */
 
 const largestPosition = Math.max(...positions);
-function getMax(object) {
-  return Object.keys(object).filter((x) => {
-    return object[x] == Math.max.apply(null, Object.values(object));
-  });
-}
-
 let n = 0;
 let sums = [];
 
-
-let getFuelCost = (x) => positions.map((element) => (element > x ? element - x : x - element)).reduce((a,b) => a + b);
-
-while (n < largestPosition) {
-    sums.push(getFuelCost(n));
-    n++
+function simpleFuelFormula(a, b) {
+  return Math.abs(a - b);
 }
-console.log(Math.min(...sums));
+
+function main(crabPositions, fuelCalculation = simpleFuelFormula) {
+  let min = Math.min(...crabPositions);
+  let max = Math.max(...crabPositions);
+  const sims = [];
+  for (let i = min; i <= max; i++) {
+    const fuels = crabPositions.map((pos) => simpleFuelFormula(pos, i));
+    const sums = fuels.reduce((acc, curr) => acc + curr);
+    sims.push({ fuel: sums, position: i });
+  }
+  const result = sims.reduce(
+    (acc, curr) => (curr.fuel < acc.fuel ? curr : acc),
+    { fuel: Infinity }
+  );
+  return result;
+}
+
+console.log(main(positions));
