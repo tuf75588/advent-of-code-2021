@@ -14,7 +14,7 @@ function partOne(map) {
   const matrix = createMatrix(map);
 
   function getCell(rowIdx, colIdx, guard) {
-    return guard ? matrix[rowIdx][colIdx]++ : Infinity;
+    return guard ? matrix[rowIdx][colIdx] : Infinity;
   }
   const lowPoints = [];
 
@@ -34,3 +34,6 @@ function partOne(map) {
 
   return totalRisk;
 }
+
+const firstAnswer = partOne(data); // 228
+console.log(firstAnswer);
