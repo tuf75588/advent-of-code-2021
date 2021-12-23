@@ -98,4 +98,46 @@ function partOne(input) {
 }
 
 const firstAnswer = partOne(data); // 390993
-console.log(firstAnswer);
+
+function completeLine(unclosed) {
+  return unclosed.map((char) => OPEN_TO_CLOSE_MAP[char]).join('');
+}
+
+const SECOND_CHAR_TO_VALUE_MAP = {
+  ')': 1,
+  ']': 2,
+  '}': 3,
+  '>': 4,
+};
+
+function partTwo(input) {
+  const lines = input.trim().split('\n');
+  const testedLines = lines.map(testLine);
+  const incompleteLines = testedLines.filter(
+    ({ result }) => result === 'incomplete'
+  );
+  const closings = incompleteLines.map(({ unclosed }) =>
+    completeLine(unclosed)
+  );
+
+  const scores = closings.map((closing) => {
+    let result = 0;
+
+    for (const char of closing) {
+      result *= 5;
+      result += SECOND_CHAR_TO_VALUE_MAP[char];
+    }
+    return result;
+  });
+
+  const sortedScores = [...scores].sort((a, b) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+  const middleIndex = Math.floor(sortedScores.length / 2);
+
+  return sortedScores[middleIndex];
+}
+
+const secondAnswer = partTwo(data); // 2391385187
