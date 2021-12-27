@@ -111,3 +111,4 @@ function partTwo(input) {
 }
 
 const secondAnswer = partTwo(data);
+console.log({ firstAnswer, secondAnswer });
